@@ -1,0 +1,60 @@
+
+CREATE DATABASE IF NOT EXISTS estrada_db;
+USE estrada_db;
+
+CREATE TABLE IF NOT EXISTS products (
+    id INT PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10,2),
+    image_url VARCHAR(255),
+    rating DECIMAL(2,1) NOT NULL,
+    date_added DATE NOT NULL
+);
+
+INSERT INTO products (id, name, price, image_url, rating, date_added) VALUES
+(1, 'Lipstick', 1200, 'https://sdcdn.io/mac/ph/mac_sku_S4K001_1x1_0.png?width=1440&height=1440', 4.8, '2024-07-01'),
+(2, 'Hand Cream', 950, 'https://www.loccitane.com/dw/image/v2/BDQL_PRD/on/demandware.static/-/Sites-occ_master/default/dwbc93d98a/CA/24MA075R23.png?sw=500&sh=500', 4.5, '2024-06-15'),
+(3, 'Face Serum', 1500, 'https://www.kiehls.com.ph/wp-content/uploads/2022/04/kiehls-face-serum-powerful-strength-line-reducing-concentrate-50ml-000-3605971536090-front.jpg', 4.9, '2024-05-20'),
+(4, 'Body Lotion', 1800, 'https://medias.watsons.com.ph/publishing/WTCPH-50037028-front-zoom.jpg?version=1721932737', 4.7, '2024-04-10'),
+(5, 'Lip Gloss', 1300, 'https://static.beautytocare.com/cdn-cgi/image/width=1600,height=1600,f=auto/media/catalog/product//m/a/makeup-revolution-juicy-pout-lip-gloss-grapefruit-4-6ml_1.png', 4.6, '2024-03-05'),
+(6, 'Face Cream', 1400, 'https://shop.flawless.com.ph/cdn/shop/files/CLEAR_Anti_Blemish_Face_Cream_Box2.jpg?v=1722994126', 4.4, '2024-02-18'),
+(7, 'Eye Shadow', 1600, 'https://makeupocean.com/wp-content/uploads/2024/05/makeup-palette-3-1.webp', 4.3, '2024-01-30'),
+(8, 'Nail Polish', 850, 'https://naturerepublic.com.ph/cdn/shop/files/NF0453.jpg?v=1691998314', 4.2, '2024-01-10'),
+(9, 'Blush', 1100, 'https://www.elfcosmetics.com/dw/image/v2/BBXC_PRD/on/demandware.static/-/Sites-elf-master/default/dw9e02a47a/2024/PrimerInfusedMatteBlush/83749_OpenA_V6_R.png', 4.7, '2023-12-20'),
+(10, 'Foundation', 1300, 'https://medias.watsons.com.ph/publishing/WTCPH-50001914-front-zoom.jpg?version=1722486228', 4.8, '2023-12-01'),
+(11, 'Face Mask', 1700, 'https://www.patchology.com/cdn/shop/files/beauty-sleep-mask-6-pack_1.jpg?v=1726089260', 4.6, '2023-11-10'),
+(12, 'Lip Balm', 1050, 'https://assets.unileversolutions.com/v1/2322812.png', 4.5, '2023-10-25'),
+(13, 'Moisturizer', 1450, 'https://www.cetaphil.com/on/demandware.static/-/Library-Sites-RefArchSharedLibrary/default/dwb7a10a7a/083422_GC_MAM_3oz_Tube-Front.PNG', 4.9, '2023-10-01'),
+(14, 'Sunscreen', 1900, 'https://www.rosepharmacy.com/ph1/wp-content/uploads/2024/06/78373.png', 4.7, '2023-09-15'),
+(15, 'Hair Oil', 1350, 'https://thebodyshop.com.ph/cdn/shop/products/1061545_2_HAIROILCOCONUT200ML.jpg?v=1748707937', 4.4, '2023-09-01'),
+(16, 'Shampoo', 1600, 'https://static.beautytocare.com/cdn-cgi/image/width=1600,height=1600,f=auto/media/catalog/product//o/g/ogx-thick-full-biotin-collagen-shampoo-385ml_2.jpg', 4.3, '2023-08-10'),
+(17, 'Conditioner', 1300, 'https://static.beautytocare.com/cdn-cgi/image/f=auto/media/catalog/product//o/g/ogx-nourishing-coconut-milk-conditioner-88-7ml_1_1.jpg', 4.2, '2023-07-20'),
+(18, 'Body Scrub', 1000, 'https://medias.watsons.com.ph/publishing/WTCPH-10101552-front-zoom.jpg?version=1721949325', 4.6, '2023-07-01'),
+(19, 'Perfume', 1450, 'https://png.pngtree.com/png-vector/20240202/ourmid/pngtree-perfume-bottle-mockup-cutout-png-file-png-image_11588760.png', 4.8, '2023-06-15'),
+(20, 'Makeup Remover', 2000, 'https://images-na.ssl-images-amazon.com/images/I/6117U77YcEL.jpg', 4.7, '2023-06-01');
+
+-- 4. Create the cart table
+CREATE TABLE IF NOT EXISTS cart (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1,
+    UNIQUE KEY unique_cart (user_id, product_id)
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    birth_date DATE NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    street VARCHAR(100) NOT NULL,
+    city VARCHAR(50) NOT NULL,
+    province VARCHAR(50) NOT NULL,
+    zip_code VARCHAR(10) NOT NULL,
+    country VARCHAR(50) NOT NULL,
+    username VARCHAR(30) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
